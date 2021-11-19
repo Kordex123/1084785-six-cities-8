@@ -1,4 +1,4 @@
-import { RoomSettings } from '../../index';
+import { RoomSettings } from '../../types/types';
 import FavouritesEmpty from '../favourites-empty/favourites-empty';
 
 type FavouriteSettingProps = {
@@ -19,6 +19,7 @@ const groupRoomByCity = (offers: RoomSettings[]) =>
 
 function Favourites({offers}: FavouriteSettingProps):JSX.Element {
   const roomsByCities = groupRoomByCity(offers);
+
   return (
     <div className="page">
       <header className="header">

@@ -1,4 +1,4 @@
-import { RoomSettings } from './index';
+import { RoomSettings } from './types/types';
 
 const offers: RoomSettings[] = [
   {

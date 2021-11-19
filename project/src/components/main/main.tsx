@@ -1,12 +1,12 @@
 import RoomPreview from '../room-preview/room-preview';
-import { RoomSettings } from '../../index';
-import { useState } from 'react';
+import { RoomSettings } from '../../types/types';
+import { useMemo, useState } from 'react';
 
 type MainSettingProps = {
   offers: RoomSettings[],
 }
 
-const getCityandRoomCount = (offers: RoomSettings[]) =>
+const getRoomCountByCity = (offers: RoomSettings[]) =>
   offers.reduce((result: {[key: string]: number}, offer: RoomSettings) => {
     if (result[offer.city.name] === undefined) {
       result[offer.city.name] = 0;
@@ -17,7 +17,8 @@ const getCityandRoomCount = (offers: RoomSettings[]) =>
 
 function Main({offers} : MainSettingProps): JSX.Element {
   const [currentCity, setCurrentCity] = useState<string>(offers[0].city.name);
-  const cityToCount = getCityandRoomCount(offers);
+  const roomCountByCity = useMemo(() => getRoomCountByCity(offers), [offers]);
+
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -25,7 +26,7 @@ function Main({offers} : MainSettingProps): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {
-              Object.keys(cityToCount).map( (city) => (
+              Object.keys(roomCountByCity).map( (city) => (
                 <li className="locations__item" key={city}>
                   <a className="locations__item-link tabs__item" href="#" onClick={() => setCurrentCity(city)}>
                     <span>{city}</span>
@@ -40,7 +41,7 @@ function Main({offers} : MainSettingProps): JSX.Element {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{cityToCount[currentCity]} places to stay in {currentCity}</b>
+            <b className="places__found">{roomCountByCity[currentCity]} places to stay in {currentCity}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>

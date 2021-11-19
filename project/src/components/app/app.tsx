@@ -1,5 +1,5 @@
 import Main from  '../main/main';
-import { RoomSettings } from '../../index';
+import { RoomSettings } from '../../types/types';
 // import Favourites from '../favourites/favourites';
 // import SignIn from '../sign-in/sign-in';
 
@@ -8,9 +8,10 @@ type AppSettingProps = {
 }
 
 function App({offers}: AppSettingProps): JSX.Element {
+
   return (
     <div>
-      <Main offers={offers}/>
+      <Main offers={offers} />
       {/*<SignIn />*/}
       {/*<Favourites offers={offers} />*/}
     </div>

@@ -1,4 +1,4 @@
-import { RoomSettings, RoomTypeToName } from '../../index';
+import { RoomSettings, RoomTypeToName } from '../../types/types';
 
 type RoomSettingProps = {
   offer: RoomSettings,
@@ -6,6 +6,7 @@ type RoomSettingProps = {
 
 function RoomPreview({offer}: RoomSettingProps): JSX.Element {
   const { isPremium, price, isFavourite, rating, title, type, previewUrl} = offer;
+
   return (
     <article className="cities__place-card place-card">
       { isPremium &&
